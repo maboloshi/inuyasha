@@ -17,13 +17,8 @@ jobs:
 
       - name: Commit file KeepAlive.txt
         run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add KeepAlive.txt
-          git commit -m "test main.user.js Update to version $(TZ='Asia/Shanghai' date +'%Y-%m-%d')"
-
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.CI_GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
+          bash script/ci.sh \
+          ${{ secrets.CI_GITHUB_TOKEN }} \
+          ${{ GITHUB_REPOSITORY }} \
+          "KeepAlive.txt" \
+          "KeepAlive.txt Update to version $(TZ='Asia/Shanghai' date +'%Y-%m-%d')"
