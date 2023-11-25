@@ -1,5 +1,5 @@
 #!/bin/bash
-
+echo $1 $2 $3 $4
 TOKEN=$1
 repoNwo=$2
 # remote=`git remote |head -1`
