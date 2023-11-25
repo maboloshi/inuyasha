@@ -17,7 +17,8 @@ jobs:
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -a -m "test main.user.js Update to version $(TZ='Asia/Shanghai' date +'%Y-%m-%d')"
+          git add KeepAlive.txt
+          git commit -m "test main.user.js Update to version $(TZ='Asia/Shanghai' date +'%Y-%m-%d')"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
