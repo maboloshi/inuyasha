@@ -14,7 +14,7 @@ jobs:
         run: |
           echo $(cat /proc/sys/kernel/random/uuid) > KeepAlive.txt
 
-      - name: Commit file: KeepAlive.txt
+      - name: Commit file KeepAlive.txt
         if: ${{ env.AHEAD == 'true' }}
         run: |
           git config --local user.name "github-actions[bot]"
