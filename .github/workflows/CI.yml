@@ -19,6 +19,6 @@ jobs:
         run: |
           bash script/ci.sh \
           ${{ secrets.CI_GITHUB_TOKEN }} \
-          ${{ env.GITHUB_REPOSITORY }} \
+          "maboloshi/inuyasha" \
           "KeepAlive.txt" \
           "KeepAlive.txt Update to version $(TZ='Asia/Shanghai' date +'%Y-%m-%d')"
