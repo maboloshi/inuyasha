@@ -1,13 +1,13 @@
 #!/bin/bash
-echo $1 $2 $3 $4
+# echo $1 $2 $3 $4
 TOKEN=$1
-repoNwo=$2
-# remote=`git remote |head -1`
-# repoNwo=`git remote get-url $remote | sed 's/.*://;s/\.git//'`
+# repoNwo=$2
+remote=`git remote |head -1`
+repoNwo=`git remote get-url $remote | sed 's/.*://;s/\.git//'`
 branch=$(git rev-parse --abbrev-ref HEAD) # 或 git rev-parse HEAD
-file_path=$3
+file_path=$2
 encoded_file_content=$(base64 < "$file_path")
-message_headline=$4
+message_headline=$3
 message_body="Signed-off-by: 沙漠之子 <7850715+maboloshi@users.noreply.github.com>"
 expectedHeadOid=$(git rev-parse HEAD)
 
