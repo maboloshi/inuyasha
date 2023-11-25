@@ -11,11 +11,11 @@ message_headline=$3
 message_body="Signed-off-by: 沙漠之子 <7850715+maboloshi@users.noreply.github.com>"
 expectedHeadOid=$(git rev-parse HEAD)
 
-# GITHUB_GRAPHQL_URL= https://api.github.com/graphql
 curl $GITHUB_GRAPHQL_URL --silent \
-     \ # echo HTTP status to demonstrate how GraphQL
-     \ # uses HTTP a mere RPC transport, response is 200 OK
-     \ # no matter what errors happen.
+     # GITHUB_GRAPHQL_URL= https://api.github.com/graphql
+     # echo HTTP status to demonstrate how GraphQL
+     # uses HTTP a mere RPC transport, response is 200 OK
+     # no matter what errors happen.
      --write-out '%{stderr}HTTP status: %{response_code}\n\n'
      -H "Authorization: bearer $TOKEN" \
      --data @- <<GRAPHQL | jq
