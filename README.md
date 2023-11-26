@@ -266,7 +266,6 @@ GitHub 的 ajax 载入方式逐步从 [defunkt/jquery-pjax](https://github.com/d
 <a href="https://github.com/maboloshi" title="沙漠之子">
   <img src="https://avatars.githubusercontent.com/u/7850715?v=4" width="42;" alt="沙漠之子"/>
 </a>
-
 <!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-END-->
 
 贡献者列表，由 [contributors](https://github.com/jaywcjlove/github-action-contributors) 自动生成
