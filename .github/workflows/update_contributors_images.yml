@@ -19,7 +19,7 @@ jobs:
 
       - name: Modify README.md
         run: |
-          sed -i -e '/<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->/,/<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-END-->/s|.*|${{steps.contributors.outputs.htmlList}}|' README.md
+          awk '/<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->/,/<\!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-END-->/{if($0~"<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->")print "'"$replacement"'"}' README.md > README.md
           git diff --exit-code README.md > /dev/null || echo "Changes detected" >> $GITHUB_ENV
 
       - name: Commit and push README.md
