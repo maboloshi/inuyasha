@@ -24,7 +24,7 @@ jobs:
           endMarker='<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-END-->'
           sed -i "/$startMarker/,/$endMarker/c\\$startMarker$escapedHtmlList$endMarker" README.md
           cat README.md
-          git diff --exit-code README.md > /dev/null || echo "Changes detected" >> $GITHUB_ENV
+          git diff --quiet --exit-code README.md || echo "CHANGES_DETECTED=true" >> $GITHUB_ENV
 
       - name: Commit and push README.md
         if: ${{ env.CHANGES_DETECTED == 'true' }}
