@@ -24,14 +24,14 @@ jobs:
           endMarker='<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-END-->'
           sed -i "/$startMarker/,/$endMarker/c\\$startMarker$escapedHtmlList$endMarker" README.md
           cat README.md
-          # git diff --exit-code README.md > /dev/null || echo "Changes detected" >> $GITHUB_ENV
+          git diff --exit-code README.md > /dev/null || echo "Changes detected" >> $GITHUB_ENV
 
       - name: Commit and push README.md
-        # if: ${{ env.CHANGES_DETECTED == 'true' }}
+        if: ${{ env.CHANGES_DETECTED == 'true' }}
         run: |
           bash script/ci_commit_with_signature.sh \
           ${{ secrets.CI_GITHUB_TOKEN }} \
-          "maboloshi/github-chinese" \
+          "maboloshi/inuyasha" \
           "README.md" \
           "修改文档: 更新`贡献者列表`" \
           "Signed-off-by: 沙漠之子 <7850715+maboloshi@users.noreply.github.com>"
