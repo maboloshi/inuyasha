@@ -22,7 +22,7 @@ jobs:
           escapedHtmlList=$(echo -e '${{steps.contributors.outputs.htmlList}}' | sed ':a;N;$!ba;s/\n/\\n/g')
           startMarker='<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->'
           endMarker='<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-END-->'
-          sed -i "/$startMarker/,/$endMarker/c\\$startMarker$escapedHtmlList$endMarker" README.md
+          sed -i "/$startMarker/,/$endMarker/{/$endMarker/!{//!d;};/$endMarker/{c$startMarker$escapedHtmlList$endMarker"\n'}}" README.md
           cat README.md
           git diff --quiet --exit-code README.md || echo "CHANGES_DETECTED=true" >> $GITHUB_ENV
 
