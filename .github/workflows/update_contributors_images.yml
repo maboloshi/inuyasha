@@ -19,11 +19,10 @@ jobs:
 
       - name: Modify README.md
         run: |
-          escapedHtmlList=$(printf "%q" '${{steps.contributors.outputs.htmlList}}')
-          startMarker="<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->"
-          endMarker="<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-END-->"
-          sed '/'"$startMarker"'/,/'"$endMarker"'/c\'"$startMarker$escapedHtmlList$endMarker" README.md > temp.md
-          mv temp.md README.md
+          escapedHtmlList=$(echo -e '${{steps.contributors.outputs.htmlList}}' | sed ':a;N;$!ba;s/\n/\\n/g')
+          startMarker='<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->'
+          endMarker='<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-END-->'
+          sed -i "/$startMarker/,/$endMarker/c\\$startMarker$escapedHtmlList$endMarker" README.md
           cat README.md
           # git diff --exit-code README.md > /dev/null || echo "Changes detected" >> $GITHUB_ENV
 
