@@ -19,7 +19,7 @@ jobs:
 
       - name: Modify README.md
         run: |
-          escapedHtmlList=$(printf "%q" "${{steps.contributors.outputs.htmlList}}")
+          escapedHtmlList=$(printf "%q" '${{steps.contributors.outputs.htmlList}}')
           startMarker="<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->"
           endMarker="<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-END-->"
           sed '/'"$startMarker"'/,/'"$endMarker"'/c\'"$startMarker$escapedHtmlList$endMarker" README.md > temp.md
