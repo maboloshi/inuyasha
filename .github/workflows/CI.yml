@@ -22,4 +22,4 @@ jobs:
           "maboloshi/inuyasha" \
           "KeepAlive.txt" \
           "KeepAlive.txt Update to version $(TZ='Asia/Shanghai' date +'%Y-%m-%d')" \
-          "Signed-off-by: 沙漠之子 <7850715+maboloshi@users.noreply.github.com>"
+          "Signed-off-by: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
