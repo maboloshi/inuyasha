@@ -18,7 +18,7 @@ jobs:
       - name: Commit file KeepAlive.txt
         run: |
           bash script/ci.sh \
-          ${{ secrets.CI_GITHUB_TOKEN }} \
+          ${{ secrets.GITHUB_TOKEN }} \
           "maboloshi/inuyasha" \
           "KeepAlive.txt" \
           "KeepAlive.txt Update to version $(TZ='Asia/Shanghai' date +'%Y-%m-%d')" \
