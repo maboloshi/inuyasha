@@ -8,7 +8,7 @@ branch=$(git rev-parse --abbrev-ref HEAD) # 或 git rev-parse HEAD
 file_path=$3
 encoded_file_content=$(base64 < "$file_path")
 message_headline=$4
-message_body="Signed-off-by: 沙漠之子 <7850715+maboloshi@users.noreply.github.com>"
+message_body=$5
 expectedHeadOid=$(git rev-parse HEAD)
 
 curl $GITHUB_GRAPHQL_URL --silent \
