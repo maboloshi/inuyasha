@@ -19,7 +19,8 @@ jobs:
 
       - name: Modify README.md
         run: |
-          awk '/<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->/,/<\!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-END-->/{if($0~"<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->")print "'"${{steps.contributors.outputs.htmlList}}"'"}' README.md > README.md
+          awk '/<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->/,/<\!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-END-->/{if($0~"<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->")print "'"${{steps.contributors.outputs.htmlList}}"'"}' README.md > temp.md
+          mv temp.md README.md
           git diff --exit-code README.md > /dev/null || echo "Changes detected" >> $GITHUB_ENV
 
       - name: Commit and push README.md
