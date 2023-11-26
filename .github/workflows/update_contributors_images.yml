@@ -18,7 +18,6 @@ jobs:
           avatarSize: 42
 
       - name: Modify README.md
-        if: ${{ env.AHEAD == 'true' }}
         run: |
           sed -i -e '/<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->/,/<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-END-->/s|.*|${{steps.contributors.outputs.htmlList}}|' README.md
           git diff --exit-code README.md > /dev/null || echo "Changes detected" >> $GITHUB_ENV
