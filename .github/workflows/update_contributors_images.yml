@@ -19,11 +19,16 @@ jobs:
 
       - name: Modify README.md
         run: |
-          bash script/update_contributors_images.sh
-          git diff --exit-code README.md > /dev/null || echo "Changes detected" >> $GITHUB_ENV
+          escapedHtmlList=$(printf "%q" "${{steps.contributors.outputs.htmlList}}")
+          startMarker="<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->"
+          endMarker="<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-END-->"
+          sed '/'"$startMarker"'/,/'"$endMarker"'/c\'"$startMarker$escapedHtmlList$endMarker" README.md > temp.md
+          mv temp.md README.md
+          cat README.md
+          # git diff --exit-code README.md > /dev/null || echo "Changes detected" >> $GITHUB_ENV
 
       - name: Commit and push README.md
-        if: ${{ env.CHANGES_DETECTED == 'true' }}
+        # if: ${{ env.CHANGES_DETECTED == 'true' }}
         run: |
           bash script/ci_commit_with_signature.sh \
           ${{ secrets.CI_GITHUB_TOKEN }} \
