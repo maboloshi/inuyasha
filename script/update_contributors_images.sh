@@ -5,3 +5,4 @@ startMarker="<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->"
 endMarker="<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-END-->"
 
 sed '/'"$startMarker"'/,/'"$endMarker"'/c\'"$startMarker$escapedHtmlList$endMarker" README.md > temp.md
+mv temp.md README.md
