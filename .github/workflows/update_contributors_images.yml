@@ -19,10 +19,7 @@ jobs:
 
       - name: Modify README.md
         run: |
-          htmlList="${{steps.contributors.outputs.htmlList}}"
-          escapedHtmlList=$(printf "%q" "$htmlList")
-          awk '/<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->/,/<\!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-END-->/{if($0~"<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->")print "'"$escapedHtmlList"'"}' README.md > temp.md
-          mv temp.md README.md
+          bash script/update_contributors_images.sh
           git diff --exit-code README.md > /dev/null || echo "Changes detected" >> $GITHUB_ENV
 
       - name: Commit and push README.md
