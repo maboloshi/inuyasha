@@ -1,0 +1,35 @@
+name: Update contributors images in README.md
+on:
+  workflow_dispatch:
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.CI_GITHUB_TOKEN }} # 要绕过分支保护规则此处不可少
+
+      - name: Generate Contributors Images
+        uses: jaywcjlove/github-action-contributors@v1.3.5
+        id: contributors
+        with:
+          filter-author: (renovate\[bot\]|renovate-bot|@github-actions-bot|dependabot\[bot\]|ImgBotApp)
+          avatarSize: 42
+
+      - name: Modify README.md
+        if: ${{ env.AHEAD == 'true' }}
+        run: |
+          sed -i -e '/<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-->/,/<!--AUTO_GENERATED_PLEASE_DONT_DELETE_IT-END-->/s|.*|${{steps.contributors.outputs.htmlList}}|' README.md
+          git diff --exit-code README.md > /dev/null || echo "Changes detected" >> $GITHUB_ENV
+
+      - name: Commit and push README.md
+        if: ${{ env.CHANGES_DETECTED == 'true' }}
+        run: |
+          bash script/ci_commit_with_signature.sh \
+          ${{ secrets.CI_GITHUB_TOKEN }} \
+          "maboloshi/github-chinese" \
+          "README.md" \
+          "修改文档: 更新`贡献者列表`"
+          "Signed-off-by: 沙漠之子 <7850715+maboloshi@users.noreply.github.com>"
+          ${{steps.contributors.outputs.htmlList}}
