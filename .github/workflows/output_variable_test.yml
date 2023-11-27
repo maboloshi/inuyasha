@@ -9,10 +9,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: output variable
+      - name: output variable1
         run: |
           echo ${{ github.repository }}
           echo ${{ github.repository_owner }}
-	  echo "$GITHUB_REPOSITORY"
-          echo "$GITHUB_REPOSITORY_OWNER"
           echo ${{ env.GITHUB_REPOSITORY }}
+
+      - name: output variable2
+        run: echo "$GITHUB_REPOSITORY_OWNER"
+
+      - name: output variable3
+        run: echo "$GITHUB_REPOSITORY"
+
+      - name: output variable4
+        run: echo $GITHUB_REPOSITORY
+
