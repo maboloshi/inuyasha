@@ -15,6 +15,7 @@ jobs:
 
       - name: Commit file KeepAlive.txt
         run: |
+          echo "$GITHUB_CONTEXT"
           bash script/ci.sh \
           ${{ secrets.GITHUB_TOKEN }} \
           ${{ env.GITHUB_REPOSITORY }} \
