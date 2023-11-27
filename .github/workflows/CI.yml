@@ -17,7 +17,7 @@ jobs:
         run: |
           bash script/ci.sh \
           ${{ secrets.GITHUB_TOKEN }} \
-          ${{ GITHUB_REPOSITORY }} \
+          ${{ env.GITHUB_REPOSITORY }} \
           "KeepAlive.txt" \
           "KeepAlive.txt Update to version $(TZ='Asia/Shanghai' date +'%Y-%m-%d')" \
           "Signed-off-by: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
