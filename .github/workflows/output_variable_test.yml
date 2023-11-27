@@ -22,5 +22,5 @@ jobs:
         run: echo "$GITHUB_REPOSITORY"
 
       - name: output variable4
-        run: echo $GITHUB_REPOSITORY
+        run: echo $GITHUB_REPOSITORY # 注意这种表达式 只能在单行run中有效 ,在 `run: |`中会报错
 
