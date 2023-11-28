@@ -1,0 +1,64 @@
+name: CI_using_github_app_verification
+on:
+  workflow_dispatch:
+
+jobs:
+  update_version_1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update KeepAlive.txt
+        run: |
+          echo $(cat /proc/sys/kernel/random/uuid) > KeepAlive.txt
+
+      - name: Commit file KeepAlive.txt
+        run: |
+          bash script/ci.sh \
+          ${{ steps.generate_token.outputs.token }} \
+          ${{ github.repository }} \
+          "KeepAlive.txt" \
+          "KeepAlive.txt Update to version $(TZ='Asia/Shanghai' date +'%Y-%m-%d')" \
+          "Signed-off-by: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+
+  update_version_2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate a token
+        id: generate_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate_token.outputs.token }} # 要绕过分支保护规则此处不可少
+          persist-credentials: false
+
+      - name: Update KeepAlive.txt -2
+        run: |
+          echo $(cat /proc/sys/kernel/random/uuid) > KeepAlive.txt
+
+      - name: Commit file KeepAlive.txt -2
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add KeepAlive.txt
+          git commit -m "test main.user.js Update to version $(TZ='Asia/Shanghai' date +'%Y-%m-%d')"
+
+      - name: Push changes -2
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.CI_GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+
