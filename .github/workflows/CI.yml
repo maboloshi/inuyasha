@@ -20,6 +20,7 @@ jobs:
           # echo "$GITHUB_CONTEXT"
           bash script/ci_commit_with_signature.sh \
           ${{ secrets.GITHUB_TOKEN }} \
+          ${{ github.repository }} \
           ${{ github.ref_name }} \
           ${{ github.sha }} \
           "KeepAlive.txt" \
