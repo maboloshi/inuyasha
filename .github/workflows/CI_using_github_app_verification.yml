@@ -22,9 +22,11 @@ jobs:
 
       - name: Commit file KeepAlive.txt
         run: |
-          bash script/ci.sh \
+          bash script/ci_commit_with_signature.sh \
           ${{ steps.generate_token.outputs.token }} \
           ${{ github.repository }} \
+          ${{ github.ref_name }} \
+          ${{ github.sha }} \
           "KeepAlive.txt" \
           "KeepAlive.txt Update to version $(TZ='Asia/Shanghai' date +'%Y-%m-%d')" \
           "Signed-off-by: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
