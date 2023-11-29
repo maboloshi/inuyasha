@@ -32,14 +32,15 @@ jobs:
           "Signed-off-by: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
 
   update_version_2:
+    needs: update_version_1
     runs-on: ubuntu-latest
     steps:
       - name: Generate a token
         id: generate_token
         uses: actions/create-github-app-token@v1
         with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Checkout repository
         uses: actions/checkout@v4
