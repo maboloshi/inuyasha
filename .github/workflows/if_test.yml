@@ -1,0 +1,27 @@
+name: CI
+on:
+  workflow_dispatch:
+
+jobs:
+  update_version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 设置环境变量
+        env:
+          AHEAD : 'true'
+
+      - name: 测试环境变量 CHANGES_DETECTED 不存在的情况-1
+        if: |
+          ${{ env.AHEAD == 'true' }} &&
+          ${{ env.CHANGES_DETECTED == 'true' }}
+        run: |
+          echo "理论上不应该看到这个输出"
+
+      - name: 测试环境变量 CHANGES_DETECTED 不存在的情况-2
+        if: ${{ env.AHEAD == 'true' && env.CHANGES_DETECTED == 'true' }}
+        run: |
+          echo "理论上下面的输出会截断"
+
+      - name: 后续操作
+        run: |
+          echo "不应该看到这个输出"
