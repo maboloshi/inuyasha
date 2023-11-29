@@ -9,6 +9,7 @@ jobs:
       - name: 设置环境变量
         env:
           AHEAD : 'true'
+        run: echo "此处设置环境变量 AHEAD"
 
       - name: 测试环境变量 CHANGES_DETECTED 不存在的情况-1
         if: |
