@@ -1,4 +1,4 @@
-name: CI
+name: step中if测试
 on:
   workflow_dispatch:
 
@@ -21,8 +21,17 @@ jobs:
       - name: 测试环境变量 CHANGES_DETECTED 不存在的情况-2
         if: ${{ env.AHEAD == 'true' && env.CHANGES_DETECTED == 'true' }}
         run: |
-          echo "理论上下面的输出会截断"
+          echo "理论上此步骤跳过"
+
+      - name: 测试环境变量 CHANGES_DETECTED 不存在的情况-3
+        env:
+          CHANGES_DETECTED : 'true'
+        if: |
+          ${{ env.AHEAD == 'true' }} &&
+          ${{ env.CHANGES_DETECTED == 'true' }}
+        run: |
+          echo "理论上不应该看到这个输出"
 
       - name: 后续操作
         run: |
-          echo "不应该看到这个输出"
+          echo "后续操作"
