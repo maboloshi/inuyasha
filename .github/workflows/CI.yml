@@ -24,4 +24,5 @@ jobs:
           ${{ github.ref_name }} \
           ${{ github.sha }} \
           "KeepAlive.txt" \
-          "KeepAlive.txt Update to version $(TZ='Asia/Shanghai' date +'%Y-%m-%d')"
+          "KeepAlive.txt Update to version $(TZ='Asia/Shanghai' date +'%Y-%m-%d')" \
+          "Signed-off-by: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
