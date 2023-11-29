@@ -32,6 +32,13 @@ jobs:
         run: |
           echo "理论上不应该看到这个输出"
 
+      - name: 测试环境变量 CHANGES_DETECTED 不存在的情况-4
+      if: |
+          ${{ env.AHEAD == 'true' }} &&
+          ${{ env.CHANGES_DETECTED == 'true' }}
+        run: |
+          echo "理论上不应该看到这个输出"
+
       - name: 后续操作
         run: |
           echo "后续操作"
