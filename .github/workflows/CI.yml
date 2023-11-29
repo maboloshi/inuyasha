@@ -18,7 +18,7 @@ jobs:
           # GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           # echo "$GITHUB_CONTEXT"
-          bash script/ci.sh \
+          bash script/ci_commit_with_signature.sh \
           ${{ secrets.GITHUB_TOKEN }} \
           ${{ github.ref_name }} \
           ${{ github.sha }} \
